@@ -10,4 +10,7 @@ public class Person
     
     // Idade;
     public int Age { get; set; }
+    
+    // Relacionamento 1:N com Transação (uma pessoa pode ter várias transações, mas cada transação pertence a apenas uma pessoa);
+    public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 }

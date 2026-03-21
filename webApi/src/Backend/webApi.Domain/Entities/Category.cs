@@ -12,4 +12,7 @@ public class Category
 
     // Finalidade (despesa/receita/ambas)
     public Purpose Purpose { get; set; }
+    
+    // Relacionamento 1:N com Transação (uma categoria pode ter várias transações, mas cada transação pertence a apenas uma categoria);
+    public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 }
