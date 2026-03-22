@@ -14,6 +14,7 @@
       <ProjectReference Include="..\..\Shared\webApi.Communication\webApi.Communication.csproj" />
       <ProjectReference Include="..\..\Shared\webApi.Exceptions\webApi.Exceptions.csproj" />
       <ProjectReference Include="..\webApi.Application\webApi.Application.csproj" />
+      <ProjectReference Include="..\webApi.Infrastructure\webApi.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

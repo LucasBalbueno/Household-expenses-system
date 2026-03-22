@@ -13,3 +13,7 @@ A camada src possui 6 projetos: API, Application, Domain, Infrastructure, Shared
 - **Entities:** Representam os objetos de negócio (`Pessoa`, `Categoria`, `Transacao`).
 - **Enums:** Definições fixas do sistema (`Finalidade`, `TipoTransacao`).
 - **Repositories (Interfaces de Repositório):** Contratos que definem como os dados devem ser acessados, sem implementar a tecnologia (ex: `IPessoaRepository`).
+
+### 2. Infrastructure
+**Responsabilidade:** Implementa os detalhes técnicos e a comunicação com o mundo externo.
+- **Data (DbContext):** Configuração do Entity Framework Core e mapeamento para o SQLite.
