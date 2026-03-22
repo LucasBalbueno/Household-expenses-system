@@ -14,4 +14,7 @@ public interface ITransactionRepository
 
     // CREATE: Adiciona uma nova transação
     Task CreateAsync(Transaction transaction);
+    
+    // Salva as alterações no Banco
+    Task SaveChangesAsync();
 }

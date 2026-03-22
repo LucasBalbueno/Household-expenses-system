@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using webApi.Application.Services;
+using webApi.Domain.Repositories;
+using webApi.Exceptions;
 using webApi.Infrastructure.Data;
+using webApi.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +14,33 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(connectionString));
 
-builder.Services.AddControllers();
+
+// Configuração de dependency injection entre interfaces e repository
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+
+
+// Configuração de Services da aplicação
+builder.Services.AddScoped<PersonService>();
+
+
+// Configuração de exceptions entre as controllers da aplicação
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ExceptionFilter>();
+});
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "API de Controle de Gastos Residenciais",
+        Version = "v1",
+        Description = "Sistema para gerenciamento de despesas residenciais."
+    });
+});
 
 var app = builder.Build();
 

@@ -18,8 +18,11 @@ public interface IPersonRepository
     Task CreateAsync(Person person);
     
     // UPDATE: Atualiza uma pessoa existente
-    void Update(Guid id, Person person);
+    void Update(Person person);
     
      // DELETE: Remove uma pessoa pelo ID
-     void Delete(Guid id);
+     void Delete(Person person);
+     
+     // Salva as alterações no Banco
+     Task SaveChangesAsync();
 }

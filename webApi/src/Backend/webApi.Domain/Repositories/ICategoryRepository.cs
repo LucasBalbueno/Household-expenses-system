@@ -14,4 +14,7 @@ public interface ICategoryRepository
 
     // CREATE: Adiciona uma nova categoria
     Task CreateAsync(Category category);
+    
+    // Salva as alterações no Banco
+    Task SaveChangesAsync();
 }
