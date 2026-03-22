@@ -17,10 +17,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Configuração de dependency injection entre interfaces e repository
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 // Configuração de Services da aplicação
 builder.Services.AddScoped<PersonService>();
+builder.Services.AddScoped<CategoryService>();
 
 
 // Configuração de exceptions entre as controllers da aplicação
