@@ -13,6 +13,7 @@ public class PersonRepository: IPersonRepository
     private readonly AppDbContext _dbContext;
 
     // Configuração do construtor repository e vinculo com DB context
+    // Esse vínculo pode ser o DB normal ou o de testes
     public PersonRepository(AppDbContext dbContext)
     {
         _dbContext = dbContext;
@@ -30,9 +31,9 @@ public class PersonRepository: IPersonRepository
     // READ: Retorna uma pessoa pelo ID
     public async Task<Person> GetByIdAsync(Guid id)
     {
-        // AsNoTracking(): Desliga o rastreamento de mudanças (deixa mais rápido quando a ideia é apenas consultar)
-        // FirstOrDefaultAsync(): Faz a busca e retorna o primeiro resultado passado como parâmetro
-        return await _dbContext.People.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+        // FindAsync(): Método otimizado para buscar chaves primárias. Se a entidade (id) já foi carregada antes não precisa fazer a querie no banco
+        // Substitui AsNoTracking() e FirstOrDefaultAsync() que realiza apenas a leitura direto no banco.
+        return await _dbContext.People.FindAsync(id);
     }
     
     // CREATE: Adiciona uma nova pessoa
