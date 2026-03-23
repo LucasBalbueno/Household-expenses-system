@@ -18,7 +18,7 @@ public class PersonServiceTests
         return new PersonService(personRepository);
     }
     
-    // Teste de criação com dados válidos. Retorna uma pessoa criada
+    // Teste de criação com dados válidos
     [Fact]
     public async Task CreateWithValidatedData_ShouldReturnPersonCreated()
     {
@@ -28,7 +28,7 @@ public class PersonServiceTests
         // Cria um objeto Pessoa (request)
         var request = new PersonRequest { Name = "Lucas Balbueno", Age = 22 };
 
-        // Chama o service passando a request como parãmetro
+        // Chama o service passando a request como parâmetro
         var result = await service.CreatePersonAsync(request);
         
         // Testa se Id não está vazio e se nome e idade estão corretos 
