@@ -1,4 +1,4 @@
-using System.Transactions;
+using webApi.Domain.Entities;
 
 namespace webApi.Domain.Repositories;
 

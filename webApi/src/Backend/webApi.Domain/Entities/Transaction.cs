@@ -21,7 +21,7 @@ public class Transaction
     
     // Tipo (despesa/receita);
     [Required]
-    public TypeTransaction type { get; set; }
+    public TypeTransaction Type { get; set; }
     
     // Categoria (identificador)
     public Guid CategoryId { get; set; }
