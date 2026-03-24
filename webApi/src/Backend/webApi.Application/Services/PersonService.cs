@@ -10,13 +10,15 @@ public class PersonService
 {
     // Camada Service de Pessoas, aqui ficará todas as regras de negócios e fará chamadas para os repositories de Infrastructure (Consultas do banco)
     
-    // Depedency Injection dos repositories Pessoa
+    // Depedency Injection dos repositories Pessoa e Transações
     private readonly IPersonRepository _personRepository;
+    private readonly ITransactionRepository _transactionRepository;
 
-    // Configurando o construtor da classe e vinculando o repository de Pessoa
-    public PersonService(IPersonRepository personRepository)
+    // Configurando o construtor da classe e vinculando o repository de Pessoa e Transação
+    public PersonService(IPersonRepository personRepository, ITransactionRepository transactionRepository)
     {
         _personRepository = personRepository;
+        _transactionRepository = transactionRepository;
     }
     
     // Serviço de buscar todas as pessoas
@@ -110,6 +112,9 @@ public class PersonService
         // Chama a função no repository (Infrastructure) que faz a busca no DB
         // Com uma condicional, se for null lançará uma exceção padronizada de webApi.Exceptions
         var person = await _personRepository.GetByIdAsync(id) ?? throw new NotFoundException("Pessoa não encontrada.");
+        
+        // Deleta as transações vinculadas a essa pessoa
+        await _transactionRepository.DeleteByPersonIdAsync(person.Id);
 
         // Chama a função no repository (Infrastructure) que deleta a pessoa no DB
         _personRepository.Delete(person);

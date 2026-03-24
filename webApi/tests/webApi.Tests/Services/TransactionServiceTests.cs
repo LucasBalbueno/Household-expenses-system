@@ -21,7 +21,7 @@ public class TransactionServiceTests
         var categoryRepository = new CategoryRepository(context);
         
         var transactionService = new TransactionService(transactionRepository, personRepository, categoryRepository);
-        var personService = new PersonService(personRepository);
+        var personService = new PersonService(personRepository, transactionRepository);
         var categoryService = new CategoryService(categoryRepository);
 
         return (transactionService, personService, categoryService);

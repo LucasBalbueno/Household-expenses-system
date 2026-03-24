@@ -15,7 +15,8 @@ public class PersonServiceTests
     {
         var context = DbContextFactory.CreateDbContext();
         var personRepository = new PersonRepository(context);
-        return new PersonService(personRepository);
+        var transactionRepository = new TransactionRepository(context);
+        return new PersonService(personRepository, transactionRepository);
     }
     
     // Teste de criação com dados válidos

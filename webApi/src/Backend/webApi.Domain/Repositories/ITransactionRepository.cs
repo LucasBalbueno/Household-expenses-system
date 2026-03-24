@@ -15,6 +15,9 @@ public interface ITransactionRepository
     // CREATE: Adiciona uma nova transação
     Task CreateAsync(Transaction transaction);
     
+    // DELETE: Deleta transação quando a pessoa vinculada é deletada
+    Task DeleteByPersonIdAsync(Guid personId);
+    
     // Salva as alterações no Banco
     Task SaveChangesAsync();
 }

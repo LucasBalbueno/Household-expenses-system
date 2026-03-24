@@ -25,7 +25,7 @@ public class TransactionRepository: ITransactionRepository
         // AsNoTracking(): Desliga o rastreamento de mudanças (deixa mais rápido quando a ideia é apenas consultar)
         // Include(): Carrega de forma otimizada entidades relacionadas (como tabelas estrangeira)
         // OrderBy(): Ordena a busca pelo nome
-        // ToListAsync(): Faz a busca no banco de dados
+        // ToListAsync(): Faz a busca no banco de dados e armazena numa lista
         return await _dbContext.Transactions
             .AsNoTracking()
             .Include(t => t.Person)
@@ -50,6 +50,19 @@ public class TransactionRepository: ITransactionRepository
     {
         //AddAsync(): Adiciona um objeto no banco
         await _dbContext.Transactions.AddAsync(transaction);
+    }
+    
+    // DELETE: Deleta transação quando a pessoa vinculada é deletada
+    public async Task DeleteByPersonIdAsync(Guid personId)
+    {
+        // Where(): Filtra a busca do banco de acordo com a condição passada
+        // ToListAsync(): Faz a busca no banco de dados e armazena numa lista
+        var transactions = await _dbContext.Transactions
+            .Where(t => t.PersonId == personId)
+            .ToListAsync();
+        
+        // RemoveRange(): Deleta multiplos elementos do banco
+        _dbContext.Transactions.RemoveRange(transactions);
     }
     
     // Salva as alterações no Banco
