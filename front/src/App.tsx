@@ -1,9 +1,11 @@
-function App() {
+import { BrowserRouter } from "react-router-dom"
+import { AppRoutes } from "./routes/routes"
 
+function App() {
   return (
-    <>
-      <h1 className='text-3xl underline bg-primary'>Tela Home</h1>
-    </>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   )
 }
 

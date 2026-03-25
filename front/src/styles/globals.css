@@ -9,6 +9,7 @@
   --color-background: var(--background);
   --color-light: var(--light);
   --color-dark: var(--dark);
+  --color-blue-neutral: var(--blue-neutral);
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-error: var(--error);
@@ -25,6 +26,7 @@
   --background: #f8f9fa;
   --light: #ffffff;
   --dark: #191c1d;
+  --blue-neutral: rgb(144, 163, 199);
 
   --success: #22c55e;
   --warning: #eab308;
