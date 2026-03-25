@@ -1,10 +1,8 @@
-import './App.css'
-
 function App() {
 
   return (
     <>
-      <h1>Tela Home</h1>
+      <h1 className='text-3xl underline bg-primary'>Tela Home</h1>
     </>
   )
 }
