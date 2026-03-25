@@ -264,12 +264,31 @@ public class TransactionServiceTests
     [Fact]
     public async Task GetTransactionWithIncorrectId_ShouldNotFoundException()
     {
-        var (transactionService, personService, categoryService) = CreateServices();
+        // _ Serve para descartar valores retornados por um método (que não será utilizado)
+        var (transactionService, _, _) = CreateServices();
 
         var incorrectId = Guid.NewGuid();
         
         var ex = await Assert.ThrowsAsync<NotFoundException>(
             () => transactionService.GetTransactionByIdAsync(incorrectId));
+
+        Assert.Equal("Transação não encontrada.", ex.Message);
+    }
+    
+    // Teste de deletar pessoa e todas as transações vinculadas
+    [Fact]
+    public async Task DeletePersonAndLinkedTransactions_ShouldReturnNotFoundException()
+    {
+        var (transactionService, personService, categoryService) = CreateServices();
+        
+        var person = await personService.CreatePersonAsync(new PersonRequest { Name = "Lucas Balbueno", Age = 20 });
+        var category = await categoryService.CreateCategoryAsync(new CategoryRequest { Description = "Livros", Purpose = Purpose.Despesa });
+        var transaction = await transactionService.CreateTransactionAsync(new TransactionRequest { Description = "Game of Thrones", Amount = 70, PersonId = person.Id, CategoryId = category.Id, TypeTransaction = TypeTransaction.Despesa });
+
+        await personService.DeletePersonAsync(person.Id);
+
+        var ex = await Assert.ThrowsAsync<NotFoundException>(
+            () => transactionService.GetTransactionByIdAsync(transaction.Id));
 
         Assert.Equal("Transação não encontrada.", ex.Message);
     }

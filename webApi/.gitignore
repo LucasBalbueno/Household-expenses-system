@@ -64,6 +64,10 @@ dlldata.c
 *.svclog
 *.scc
 
+# Database build files
+app.db-shm
+app.db-wal
+
 # Chutzpah Test files
 _Chutzpah*
 
