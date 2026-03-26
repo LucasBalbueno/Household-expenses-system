@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { sidebarItems } from "../../../utils/sidebarItems";
+import { sidebarItems } from "./sidebarItems";
 
 export const Sidebar = () => {
     return(

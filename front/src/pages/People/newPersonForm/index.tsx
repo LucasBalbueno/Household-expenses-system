@@ -2,8 +2,11 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { personSchema, type PersonFormData } from '../../../schemas/personSchema';
+import { usePeopleContext } from '../../../contexts/PeopleContext';
 
 export default function NewPersonForm() {
+  const { createPerson, loading } = usePeopleContext();
+  
   const {
     register,
     handleSubmit
@@ -12,8 +15,16 @@ export default function NewPersonForm() {
     mode: 'onSubmit'
   });
 
-  const handleFormSubmit = (data: PersonFormData) => {
-    onSubmit(data);
+  const handleFormSubmit = async (data: PersonFormData) => {
+    try {
+      await createPerson({
+        name: data.nome,
+        age: Number(data.idade)
+      });
+      toast.success('Cadastro salvo com sucesso!');
+    } catch (error) {
+      toast.error('Erro ao salvar cadastro. Tente novamente.');
+    }
   };
 
   const handleFormError = (errors: any) => {
@@ -23,11 +34,6 @@ export default function NewPersonForm() {
     if (errors.idade) {
       toast.error(errors.idade.message);
     }
-  };
-
-  const onSubmit = (data: PersonFormData) => {
-    console.log('Dados do formulário:', data);
-    toast.success('Cadastro salvo com sucesso!');
   };
 
   return (
@@ -72,10 +78,12 @@ export default function NewPersonForm() {
 
             <button
               type="submit"
+              disabled={loading}
               className="w-full h-12 bg-secondary text-white rounded-lg font-medium transition-all duration-200
-                hover:bg-secondary/90 active:bg-secondary/95 focus:outline-none focus:ring-2 focus:ring-secondary/30 cursor-pointer"
+                hover:bg-secondary/90 active:bg-secondary/95 focus:outline-none focus:ring-2 focus:ring-secondary/30 cursor-pointer
+                disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Salvar Cadastro
+              {loading ? 'Salvando...' : 'Salvar Cadastro'}
             </button>
           </form>
         </div>

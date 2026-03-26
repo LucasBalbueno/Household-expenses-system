@@ -47,6 +47,17 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+// Configuração de CORS - permite requisições do front-end React
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Cria/Atualiza o arquivo .db do SQLite automaticamente ao iniciar o app
@@ -64,6 +75,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowFrontend");
 
 app.UseAuthorization();
 

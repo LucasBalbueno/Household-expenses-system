@@ -5,8 +5,8 @@ import { Toaster } from "sonner"
 function App() {
   return (
     <BrowserRouter>
-      <AppRoutes />
-      <Toaster />
+        <AppRoutes />
+        <Toaster />
     </BrowserRouter>
   )
 }
