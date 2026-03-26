@@ -4,10 +4,10 @@ import { Sidebar } from "./components/layout/sidebar";
 
 export function Layout() {
   return (
-    <div className="flex">
+    <div className="flex min-h-screen">
       <Sidebar />
 
-      <main className="p-6 min-h-screen">
+      <main className="flex-1 p-6 min-h-screen">
         <Outlet />
       </main>
     </div>
