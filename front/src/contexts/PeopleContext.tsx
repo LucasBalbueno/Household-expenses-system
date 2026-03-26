@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
 import { usePeople } from '../hooks/usePeople';
-import type { Person } from '../types/personType';
+import type { Person, PersonData } from '../types/peopleTypes';
 
 // Contrato do contexto (tudo que o provider vai expor)
 interface PeopleContextType {
@@ -9,7 +9,9 @@ interface PeopleContextType {
   loading: boolean;
   error: string | null;
   fetchPeople: () => Promise<void>;
-  createPerson: (person: Person) => Promise<void>;
+  createPerson: (person: PersonData) => Promise<void>;
+  updatePerson: (id: number, person: PersonData) => Promise<void>;
+  deletePerson: (id: number) => Promise<void>;
 }
 
 // Cria o contexto com o contrato
@@ -18,7 +20,7 @@ const PeopleContext = createContext<PeopleContextType | undefined>(undefined);
 // Provider que expõe os dados e funções
 export function PeopleProvider({ children }: { children: ReactNode }) {
   // Usa o hook para buscar funções de people
-  const { people, loading, error, fetchPeople, createPerson } = usePeople();
+  const { people, loading, error, fetchPeople, createPerson, updatePerson, deletePerson } = usePeople();
 
   return (
     <PeopleContext.Provider value={{
@@ -26,7 +28,9 @@ export function PeopleProvider({ children }: { children: ReactNode }) {
       loading,
       error,
       fetchPeople,
-      createPerson
+      createPerson,
+      updatePerson,
+      deletePerson
     }}>
       {children}
     </PeopleContext.Provider>

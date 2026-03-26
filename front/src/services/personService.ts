@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Person } from "../types/personType";
+import type { Person, PersonData } from "../types/peopleTypes";
 
 // ***** ATENÇÂO *****
 // URL da API (MUDAR PARA A PORTA QUE O BACKEND ESTÁ RODANDO)
@@ -30,7 +30,7 @@ export const personService = {
   },
 
   // Serviço para criar uma pessoa
-  async create(person: Person): Promise<Person[]> {
+  async create(person: PersonData): Promise<Person[]> {
     try {
       const response = await api.post("/people", person);
       return response.data;
@@ -39,4 +39,25 @@ export const personService = {
       throw error;
     }
   },
+
+  // Serviço para atualizar uma pessoa
+  async update(id: number, person: PersonData): Promise<Person[]> {
+    try {
+      const response = await api.put(`/people/${id}`, person);
+      return response.data;
+    } catch (error) {
+      validationError(error);
+      throw error;
+    }
+  },
+
+  // Serviço para deletar uma pessoa
+  async delete(id: number): Promise<void> {
+    try {
+      await api.delete(`/people/${id}`);
+    } catch (error) {
+      validationError(error);
+      throw error;
+    }
+  }
 };

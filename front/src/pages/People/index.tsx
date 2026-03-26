@@ -1,4 +1,4 @@
-import NewPersonForm from "./newPersonForm"
+import PersonForm from "./personForm"
 import PersonList from "./PersonList"
 import { PeopleProvider } from "../../contexts/PeopleContext"
 
@@ -12,7 +12,7 @@ export const People = () => {
 
                 <div className="flex gap-8 w-full">
                     <div className="w-[30%]">
-                        <NewPersonForm />
+                        <PersonForm />
                     </div>
                     <div className="w-[70%]">
                         <PersonList />

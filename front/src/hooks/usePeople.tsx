@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { personService } from '../services/personService';
-import type { Person } from '../types/personType';
+import type { Person, PersonData } from '../types/peopleTypes';
 
 export function usePeople() {
   // Inicializa os estados com valores padrão
@@ -25,9 +25,31 @@ export function usePeople() {
 
   // Cria uma nova pessoa e atualiza a lista de pessoas
   // UseCallback usa cache para evitar recriação desnecessária (re-renderizações)
-  const createPerson = useCallback(async (person: Person) => {
+  const createPerson = useCallback(async (person: PersonData) => {
     try {
       await personService.create(person);
+      await fetchPeople();
+    } catch (error) {
+      throw error;
+    }
+  }, [fetchPeople]);
+
+  // Atualiza uma pessoa e atualiza a lista de pessoas
+  // UseCallback usa cache para evitar recriação desnecessária (re-renderizações)
+  const updatePerson = useCallback(async (id: number, person: PersonData) => {
+    try {
+      await personService.update(id, person);
+      await fetchPeople();
+    } catch (error) {
+      throw error;
+    }
+  }, [fetchPeople]);
+
+  // Deleta uma pessoa e atualiza a lista de pessoas
+  // UseCallback usa cache para evitar recriação desnecessária (re-renderizações)
+  const deletePerson = useCallback(async (id: number) => {
+    try {
+      await personService.delete(id);
       await fetchPeople();
     } catch (error) {
       throw error;
@@ -40,5 +62,5 @@ export function usePeople() {
   }, [fetchPeople]);
 
   // Retorna os valores e funções
-  return { people, loading, error, fetchPeople, createPerson };
+  return { people, loading, error, fetchPeople, createPerson, updatePerson, deletePerson };
 }
