@@ -16,12 +16,6 @@ export type PersonFormProps = {
   onSuccess?: () => void;
 };
 
-export type EditModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  person: Person | null;
-};
-
 export type PersonItemProps = {
   person: Person;
   onEdit: (person: Person) => void;

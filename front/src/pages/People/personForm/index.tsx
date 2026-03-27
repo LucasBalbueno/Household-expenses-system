@@ -1,10 +1,12 @@
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import type { PersonFormProps, PersonData } from '../../../types/peopleTypes';
 import { personSchema, type PersonFormData } from '../../../schemas/personSchema';
 import { usePeopleContext } from '../../../contexts/PeopleContext';
-import type { PersonFormProps, PersonData } from '../../../types/peopleTypes';
+import { InputForms } from '../../../components/ui/inputs/inputForms';
+import { SubmitButton } from '../../../components/ui/buttons/submitButton';
 
 export default function PersonForm({ 
   initialValues, 
@@ -17,7 +19,7 @@ export default function PersonForm({
   const {
     register,
     handleSubmit,
-    reset
+    reset,
   } = useForm<PersonFormData>({
     resolver: zodResolver(personSchema),
     mode: 'onSubmit',
@@ -95,42 +97,30 @@ export default function PersonForm({
           </div>
 
           <form onSubmit={handleSubmit(handleFormSubmit, handleFormError)} className="space-y-6">
-            <div>
-              <label className="text-dark block mb-2">
-                Nome Completo
-              </label>
-              <input
-                type="text"
-                className="w-full h-10 p-2 bg-background rounded-sm transition-all duration-200 outline-none focus:ring-2 focus:ring-primary/30"
-                placeholder="Digite seu nome completo"
-                {...register('nome')}
-                maxLength={200}
-              />
-            </div>
+            <InputForms
+              label="Nome Completo"
+              type="text"
+              placeholder="Digite seu nome completo"
+              register={register}
+              name="nome"
+              maxLength={200}
+            />
 
-            <div>
-              <label className="text-dark block mb-2">
-                Idade
-              </label>
-              <input
-                type="number"
-                className="w-full h-10 p-2 bg-background rounded-sm transition-all duration-200 outline-none focus:ring-2 focus:ring-primary/30"
-                placeholder="Digite sua idade"
-                {...register('idade')}
-                min="0"
-                max="120"
-              />
-            </div>
+            <InputForms
+              label="Idade"
+              type="number"
+              placeholder="Digite sua idade"
+              register={register}
+              name="idade"
+              min={0}
+              max={120}
+            />
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full h-12 bg-secondary text-white rounded-lg font-medium transition-all duration-200
-                hover:bg-secondary/90 active:bg-secondary/95 focus:outline-none focus:ring-2 focus:ring-secondary/30 cursor-pointer
-                disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? (isEditing ? 'Atualizando...' : 'Criando...') : (isEditing ? 'Atualizar Pessoa' : 'Criar Pessoa')}
-            </button>
+            <SubmitButton
+              loading={loading}
+              isEditing={isEditing}
+              entityName="Pessoa"
+            />
           </form>
         </div>
       </div>

@@ -1,9 +1,12 @@
-import { RiRefreshLine } from 'react-icons/ri';
-import { useState } from 'react';
-import { usePeopleContext } from '../../../contexts/PeopleContext';
 import { toast } from 'sonner';
-import EditModal from '../EditModal';
+import { useState } from 'react';
+import PersonForm from '../personForm';
 import PersonItem from './PersonItem';
+import { usePeopleContext } from '../../../contexts/PeopleContext';
+import EditModal from '../../../components/ui/editModal';
+import { ErrorList } from '../../../components/ui/errorList';
+import { LoadingList } from '../../../components/ui/loadingList';
+import { GenericList } from '../../../components/ui/genericList';
 import type { PersonListProps, Person } from '../../../types/peopleTypes';
 
 export default function PersonList(_: PersonListProps) {
@@ -31,68 +34,39 @@ export default function PersonList(_: PersonListProps) {
   };
 
   if (loading) {
-    return(
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <h2 className="text-xl font-semibold">
-          Carregando...
-        </h2>
-      </div>
-    )
-  };
+    return <LoadingList />;
+  }
 
   if (error) {
-    return (
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-error">
-            Erro ao carregar pessoas
-          </h2>
-          <button
-            onClick={fetchPeople}
-            className="p-2 hover:text-secondary hover:bg-secondary/10 rounded-lg transition-colors"
-            aria-label="Tentar novamente"
-          >
-            <RiRefreshLine size={20} />
-          </button>
-        </div>
-      </div>
-    );
+    return <ErrorList objectName="pessoas" onRefresh={fetchPeople} />;
   }
 
   return (
     <>
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-dark/60 tracking-wide">
-            MEMBROS CADASTRADOS ({people.length})
-          </h2>
-          <button
-            onClick={fetchPeople}
-            className="p-2 text-dark hover:text-secondary hover:bg-secondary/10 rounded-lg transition-colors cursor-pointer"
-            aria-label="Atualizar lista"
-          >
-            <RiRefreshLine size={20} />
-          </button>
-        </div>
-        {people.length === 0 && <p className="text-dark/50 text-sm mb-4">Nenhuma pessoa cadastrada ainda.</p>}
-        
-        <div className="space-y-3 overflow-y-auto max-h-[60vh]">
-          {people.map((person) => (
-            <PersonItem
-              key={person.id}
-              person={person}
-              onEdit={openEditModal}
-              onDelete={handleDelete}
-            />
-          ))}
-        </div>
-      </div>
+      <GenericList
+        objectNameSingular='pessoa'
+        objectNamePlural='pessoas'
+        object={people}
+        onRefresh={fetchPeople}
+      >
+        {people.map((person) => (
+          <PersonItem
+            key={person.id}
+            person={person}
+            onEdit={openEditModal}
+            onDelete={handleDelete}
+          />
+        ))}
+      </GenericList>
       
-      <EditModal
-        isOpen={isModalOpen}
-        onClose={closeEditModal}
-        person={editingPerson}
-      />
+      <EditModal isOpen={isModalOpen} onClose={closeEditModal}>
+        <PersonForm
+          initialValues={editingPerson || undefined}
+          isEditing={true}
+          personId={editingPerson?.id}
+          onSuccess={closeEditModal}
+        />
+      </EditModal>
     </>
   );
 }
