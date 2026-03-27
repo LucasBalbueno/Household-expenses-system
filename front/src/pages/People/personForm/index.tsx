@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { PersonFormProps, PersonData } from '../../../types/peopleTypes';
 import { personSchema, type PersonFormData } from '../../../schemas/personSchema';
-import { usePeopleContext } from '../../../contexts/PeopleContext';
 import { InputForms } from '../../../components/ui/inputs/inputForms';
 import { SubmitButton } from '../../../components/ui/buttons/submitButton';
+import { usePeopleContext } from '../../../contexts/PeopleContext';
 
 export default function PersonForm({ 
   initialValues, 

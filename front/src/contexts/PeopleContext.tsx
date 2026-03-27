@@ -1,18 +1,8 @@
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
 import { usePeople } from '../hooks/usePeople';
-import type { Person, PersonData } from '../types/peopleTypes';
+import type { PeopleContextType } from '../types/peopleTypes';
 
-// Contrato do contexto (tudo que o provider vai expor)
-interface PeopleContextType {
-  people: Person[];
-  loading: boolean;
-  error: string | null;
-  fetchPeople: () => Promise<void>;
-  createPerson: (person: PersonData) => Promise<void>;
-  updatePerson: (id: number, person: PersonData) => Promise<void>;
-  deletePerson: (id: number) => Promise<void>;
-}
 
 // Cria o contexto com o contrato
 const PeopleContext = createContext<PeopleContextType | undefined>(undefined);

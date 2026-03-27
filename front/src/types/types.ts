@@ -32,8 +32,15 @@ export type InputProps = {
   placeholder: string;
   register: UseFormRegister<any>;
   name: string;
-  error?: string;
   maxLength?: number;
   min?: number;
   max?: number;
+}
+
+export type SelectInputProps = {
+  label: string;
+  placeholder: string;
+  options: { value: string; label: string }[];
+  register?: UseFormRegister<any>;
+  name?: string;
 }

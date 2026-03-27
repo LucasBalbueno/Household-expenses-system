@@ -23,3 +23,13 @@ export type PersonItemProps = {
 };
 
 export type PersonListProps = object;
+
+export type PeopleContextType = {
+  people: Person[];
+  loading: boolean;
+  error: string | null;
+  fetchPeople: () => Promise<void>;
+  createPerson: (person: PersonData) => Promise<void>;
+  updatePerson: (id: number, person: PersonData) => Promise<void>;
+  deletePerson: (id: number) => Promise<void>;
+}

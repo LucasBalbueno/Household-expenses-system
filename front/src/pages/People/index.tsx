@@ -1,5 +1,5 @@
 import PersonForm from "./personForm"
-import PersonList from "./PersonList"
+import PersonList from "./personList"
 import { PeopleProvider } from "../../contexts/PeopleContext"
 
 export const People = () => {
