@@ -7,7 +7,7 @@ export const People = () => {
         <PeopleProvider>
             <div className="bg-background p-6">
                 <div className="mb-10">
-                    <h1 className="text-3xl font-bold text-dark">Pessoas</h1>
+                    <h1 className="text-2xl font-bold text-dark">Pessoas</h1>
                 </div>
 
                 <div className="flex gap-8 w-full">
