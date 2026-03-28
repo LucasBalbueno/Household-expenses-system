@@ -47,10 +47,7 @@ A API estará disponível em: `http://localhost:5163`
 
 #### 3. Configurar o Frontend
 
-**Opção 1 - Acesse o link do github pages:**
-https://lucasbalbueno.github.io/Household-expenses-system/
-
-**Opção 2 - Execução manual:**
+**Execução manual:**
 ```bash
 # Navegar para a pasta do frontend (em outro terminal)
 cd front
