@@ -2,9 +2,12 @@ import type { TransactionItemProps } from "../../../types/transactionTypes";
 import { formatMoney } from "../../../utils/formatMoney";
 
 export default function TransactionItem({ transaction }: TransactionItemProps) {
+    // Formatar descrição da categoria
     const categoryDescription = transaction.categoryDescription.charAt(0).toUpperCase() + transaction.categoryDescription.slice(1);
     const category = categoryDescription.length > 20 ? categoryDescription.substring(0, 20) + '...' : categoryDescription;
+    // Formatar descrição da transação
     const description = transaction.description.length > 20 ? transaction.description.substring(0, 20) + '...' : transaction.description;
+    // Formatar nome da pessoa
     const personName = transaction.personName.length > 20 ? transaction.personName.substring(0, 20) + '...' : transaction.personName;
 
     return (

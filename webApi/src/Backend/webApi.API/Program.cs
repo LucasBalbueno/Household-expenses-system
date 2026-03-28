@@ -7,6 +7,12 @@ using webApi.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configuração da porta padrão
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5163); // HTTP porta 5163
+});
+
 // Configuração do DB (DbContext + SQlite)
 // Arquivo .db é criado no projeto webApi.API
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=app.db";

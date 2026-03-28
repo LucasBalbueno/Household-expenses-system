@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+// Validação dos dados do formulário de transação
 export const transactionSchema = z.object({
   description: z.string()
     .min(1, 'Descrição é obrigatória')
@@ -21,5 +22,6 @@ export const transactionSchema = z.object({
   personId: z.string().min(1, 'Pessoa é obrigatória')
 });
 
+// Tipo inferido dos dados do formulário de transação
 export type TransactionFormInput = z.input<typeof transactionSchema>;
 export type TransactionFormData = z.infer<typeof transactionSchema>;

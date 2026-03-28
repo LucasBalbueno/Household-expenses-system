@@ -2,6 +2,7 @@ import { useReportContext } from "../../../contexts/ReportContext";
 import { ByPersonItems } from "./byPersonItems";
 
 export const ListByPeople = () => {
+    // Contexto de relatórios
     const { reportsByPerson } = useReportContext();
 
     return (

@@ -3,6 +3,7 @@ import { useReportContext } from "../../../contexts/ReportContext";
 import { formatMoney } from "../../../utils/formatMoney";
 
 export const Balance = () => {
+    // Contexto de relatórios
     const { reportsByPerson } = useReportContext();
     
     return (

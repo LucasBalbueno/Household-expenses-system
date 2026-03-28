@@ -1,5 +1,7 @@
+// Validação dos dados do formulário de pessoa
 import { z } from 'zod';
 
+// Schema de validação dos dados do formulário de pessoa
 export const personSchema = z.object({
   nome: z.string()
     .min(1, 'Nome é obrigatório')
@@ -10,4 +12,5 @@ export const personSchema = z.object({
     .refine((val) => parseInt(val) <= 120, 'Idade deve ser menor que 120')
 });
 
+// Tipo inferido dos dados do formulário de pessoa
 export type PersonFormData = z.infer<typeof personSchema>;

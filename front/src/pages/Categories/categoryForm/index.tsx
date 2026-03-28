@@ -9,6 +9,7 @@ import type { CategoryData, CategoryFormProps } from "../../../types/categoryTyp
 import { categorySchema, type CategoryFormData } from '../../../schemas/categorySchema';
 import { InputSelectSearch } from '../../../components/ui/inputs/inputSelectSearch';
 
+// Opções de propósito
 const purposeOptions = [
   { value: '1', label: 'Despesa' },
   { value: '2', label: 'Receita' },
@@ -20,6 +21,7 @@ export default function CategoryForm({
 }: CategoryFormProps) {
   const { createCategory, loading } = useCategoryContext();
   
+  // Hook do formulário
   const {
     register,
     handleSubmit,
@@ -33,6 +35,7 @@ export default function CategoryForm({
     }
   });
 
+  // Efeito para popular o formulário com dados iniciais
   useEffect(() => {
     if (initialValues) {
       reset({
@@ -42,11 +45,13 @@ export default function CategoryForm({
     }
   }, [initialValues, reset]);
 
+  // Função para criar os dados da categoria
   const createCategoryData = (data: CategoryFormData): CategoryData => ({
     description: data.description,
     purpose: parseInt(data.purpose) as any
   });
 
+  // Função para lidar com o envio do formulário
   const handleFormSubmit = async (data: CategoryFormData) => {
         try {
       await createCategory(createCategoryData(data));
@@ -57,6 +62,7 @@ export default function CategoryForm({
     }
   };
 
+  // Função para lidar com erros do formulário
   const handleFormError = (errors: any) => {
     if (errors.description) toast.error(errors.description.message);
     if (errors.purpose) toast.error(errors.purpose.message);

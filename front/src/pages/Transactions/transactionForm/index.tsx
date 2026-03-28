@@ -13,6 +13,7 @@ import { useTransactionContext } from "../../../contexts/TransactionContext";
 import { TypeTransaction, type TransactionData, type TransactionFormProps } from "../../../types/transactionTypes";
 import { transactionSchema, type TransactionFormData, type TransactionFormInput } from '../../../schemas/transactionSchema';
 
+// Opções de tipo de transação
 const typeOptions = [
   { value: '1', label: 'Despesa' },
   { value: '2', label: 'Receita' }
@@ -21,10 +22,12 @@ const typeOptions = [
 export default function TransactionForm({ 
   initialValues
 }: TransactionFormProps) {
+  // Contextos
   const { createTransaction, loading } = useTransactionContext();
   const { categories, fetchCategories } = useCategoryContext();
   const { people, fetchPeople } = usePeopleContext();
 
+  // Hook do formulário
   const {
     register,
     handleSubmit,
@@ -41,11 +44,13 @@ export default function TransactionForm({
     }
   });
 
+  // Popular categorias e pessoas na inicialização do componente
   useEffect(() => {
     fetchCategories();
     fetchPeople();
   }, [fetchCategories, fetchPeople]);
 
+  // Resetar formulário quando valores iniciais mudarem
   useEffect(() => {
     if (initialValues) {
       reset({
@@ -58,16 +63,19 @@ export default function TransactionForm({
     }
   }, [initialValues, reset]);
 
+  // Opções de categorias
   const categoryOptions = categories.map(category => ({
     value: String(category.id),
     label: category.description
   }));
 
+  // Opções de pessoas
   const personOptions = people.map(person => ({
     value: String(person.id),
     label: person.name
   }));
 
+  // Criar dados da transação
   const createTransactionData = (data: TransactionFormData): TransactionData => ({
     description: data.description,
     amount: data.amount,
@@ -76,6 +84,7 @@ export default function TransactionForm({
     personId: data.personId
   });
 
+  // Manipular envio do formulário
   const handleFormSubmit = async (data: TransactionFormData) => {
     try {
       await createTransaction(createTransactionData(data));
@@ -96,6 +105,7 @@ export default function TransactionForm({
     }
   };
 
+  // Manipular erros do formulário
   const handleFormError = (errors: any) => {
     if (errors.description) toast.error(errors.description.message);
     if (errors.amount) toast.error(errors.amount.message);

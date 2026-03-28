@@ -2,6 +2,7 @@ import { ByCategoryItems } from "./byCategoyItems";
 import { useReportContext } from "../../../contexts/ReportContext";
 
 export const ListByCategories = () => {
+    // Contexto de relatórios
     const { reportsByCategory } = useReportContext();
     
     return (

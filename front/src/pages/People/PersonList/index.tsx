@@ -11,20 +11,25 @@ import type { Person } from '../../../types/peopleTypes';
 import type { ListProps } from '../../../types/types';
 
 export default function PersonList(_: ListProps) {
+  // Contexto de pessoas
   const { people, loading, error, fetchPeople, deletePerson } = usePeopleContext();
+  // Estados
   const [editingPerson, setEditingPerson] = useState<Person | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Função para abrir o modal de edição
   const openEditModal = (person: Person) => {
     setEditingPerson(person);
     setIsModalOpen(true);
   };
 
+  // Função para fechar o modal de edição
   const closeEditModal = () => {
     setIsModalOpen(false);
     setEditingPerson(null);
   };
 
+  // Função para deletar pessoa
   const handleDelete = async (person: Person) => {
     try {
       await deletePerson(person.id);
@@ -34,10 +39,12 @@ export default function PersonList(_: ListProps) {
     }
   };
 
+  // Renderizar loading
   if (loading) {
     return <LoadingList />;
   }
 
+  // Renderizar erro
   if (error) {
     return <ErrorList objectName="pessoas" onRefresh={fetchPeople} />;
   }

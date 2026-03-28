@@ -14,8 +14,10 @@ export default function PersonForm({
   personId, 
   onSuccess 
 }: PersonFormProps) {
+  // Contexto de pessoas
   const { createPerson, updatePerson, loading } = usePeopleContext();
   
+  // Hook do formulário
   const {
     register,
     handleSubmit,
@@ -29,6 +31,7 @@ export default function PersonForm({
     }
   });
 
+  // Efeito para popular o formulário com dados iniciais
   useEffect(() => {
     if (initialValues) {
       reset({
@@ -38,11 +41,13 @@ export default function PersonForm({
     }
   }, [initialValues, reset]);
 
+  // Função para criar dados de pessoa
   const createPersonData = (data: PersonFormData): PersonData => ({
     name: data.nome,
     age: Number(data.idade)
   });
 
+  // Função para criar pessoa
   const handleCreateSubmit = async (data: PersonFormData) => {
     try {
       await createPerson(createPersonData(data));
@@ -53,6 +58,7 @@ export default function PersonForm({
     }
   };
 
+  // Função para atualizar pessoa
   const handleEditSubmit = async (data: PersonFormData) => {
     if (!personId) return;
     
@@ -65,6 +71,7 @@ export default function PersonForm({
     }
   };
 
+  // Função para lidar com o envio do formulário
   const handleFormSubmit = async (data: PersonFormData) => {
     if (isEditing) {
       await handleEditSubmit(data);
@@ -73,6 +80,7 @@ export default function PersonForm({
     }
   };
 
+  // Função para lidar com erros do formulário
   const handleFormError = (errors: any) => {
     if (errors.nome) toast.error(errors.nome.message);
     if (errors.idade) toast.error(errors.idade.message);

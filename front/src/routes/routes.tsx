@@ -1,3 +1,5 @@
+// Arquivo de rotas da aplicação
+
 import { Routes, Route } from "react-router-dom"
 import { Layout } from "../layout"
 import { Dashboard } from "../pages/Dashboard"

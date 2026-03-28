@@ -6,12 +6,15 @@ import { ErrorList } from '../../../components/ui/errorList';
 import { GenericList } from '../../../components/ui/genericList';
 
 export default function CategoryList(_: ListProps) {
+  // Contexto de categorias
   const { categories, loading, error, fetchCategories } = useCategoryContext();
 
+  // Verifica se está carregando
   if (loading) {
     return <LoadingList />;
   }
 
+  // Verifica se houve erro
   if (error) {
     return <ErrorList objectName="pessoas" onRefresh={fetchCategories} />;
   }

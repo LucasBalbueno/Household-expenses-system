@@ -6,12 +6,15 @@ import { useTransactionContext } from '../../../contexts/TransactionContext';
 import type { ListProps } from '../../../types/types';
 
 export default function TransactionList(_: ListProps) {
+  // Hook do contexto de transações
   const { transactions, loading, error, fetchTransactions } = useTransactionContext();
 
+  // Verificar se está carregando
   if (loading) {
     return <LoadingList />;
   }
 
+  // Verificar se houve erro
   if (error) {
     return <ErrorList objectName="transações" onRefresh={fetchTransactions} />;
   }
