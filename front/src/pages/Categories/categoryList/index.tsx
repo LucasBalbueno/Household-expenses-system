@@ -1,11 +1,11 @@
-import type { CategoryListProps } from '../../../types/categoryTypes';
+import CategoryItem from './categoryItem';
+import type { ListProps } from '../../../types/types';
 import { useCategoryContext } from '../../../contexts/CategoryContext';
 import { LoadingList } from '../../../components/ui/loadingList';
 import { ErrorList } from '../../../components/ui/errorList';
 import { GenericList } from '../../../components/ui/genericList';
-import CategoryItem from './categoryItem';
 
-export default function CategoryList(_: CategoryListProps) {
+export default function CategoryList(_: ListProps) {
   const { categories, loading, error, fetchCategories } = useCategoryContext();
 
   if (loading) {

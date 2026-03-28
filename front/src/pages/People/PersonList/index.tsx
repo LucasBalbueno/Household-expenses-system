@@ -1,15 +1,16 @@
 import { toast } from 'sonner';
 import { useState } from 'react';
+import PersonItem from './personItem';
 import PersonForm from '../personForm';
 import { usePeopleContext } from '../../../contexts/PeopleContext';
 import EditModal from '../../../components/ui/editModal';
 import { ErrorList } from '../../../components/ui/errorList';
 import { LoadingList } from '../../../components/ui/loadingList';
 import { GenericList } from '../../../components/ui/genericList';
-import type { PersonListProps, Person } from '../../../types/peopleTypes';
-import PersonItem from './PersonItem';
+import type { Person } from '../../../types/peopleTypes';
+import type { ListProps } from '../../../types/types';
 
-export default function PersonList(_: PersonListProps) {
+export default function PersonList(_: ListProps) {
   const { people, loading, error, fetchPeople, deletePerson } = usePeopleContext();
   const [editingPerson, setEditingPerson] = useState<Person | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

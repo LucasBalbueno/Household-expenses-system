@@ -10,8 +10,8 @@ export default function PersonItem({ person, onEdit, onDelete }: PersonItemProps
           {person.name.charAt(0).toUpperCase()}
         </div>
         <div>
-          <p className="font-medium text-dark">{person.name}</p>
-          <p className="text-sm text-dark">
+          <p className="max-w-100 truncate font-medium text-dark">{person.name}</p>
+          <p className="text-sm text-dark/40">
             {person.age} {person.age > 1 ? 'anos' : 'ano'}
           </p>
         </div>

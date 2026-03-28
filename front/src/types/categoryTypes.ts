@@ -25,8 +25,6 @@ export type CategoryItemProps = {
   category: Category;
 };
 
-export type CategoryListProps = object;
-
 export type CategoryContextType = {
   categories: Category[];
   loading: boolean;

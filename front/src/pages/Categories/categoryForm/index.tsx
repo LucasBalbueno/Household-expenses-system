@@ -58,12 +58,8 @@ export default function CategoryForm({
   };
 
   const handleFormError = (errors: any) => {
-    if (errors.description) {
-      toast.error(errors.description.message);
-    }
-    if (errors.purpose) {
-      toast.error(errors.purpose.message);
-    }
+    if (errors.description) toast.error(errors.description.message);
+    if (errors.purpose) toast.error(errors.purpose.message);
   };
 
   return (

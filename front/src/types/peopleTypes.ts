@@ -22,8 +22,6 @@ export type PersonItemProps = {
   onDelete: (person: Person) => void;
 };
 
-export type PersonListProps = object;
-
 export type PeopleContextType = {
   people: Person[];
   loading: boolean;

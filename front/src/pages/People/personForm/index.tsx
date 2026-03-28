@@ -74,12 +74,8 @@ export default function PersonForm({
   };
 
   const handleFormError = (errors: any) => {
-    if (errors.nome) {
-      toast.error(errors.nome.message);
-    }
-    if (errors.idade) {
-      toast.error(errors.idade.message);
-    }
+    if (errors.nome) toast.error(errors.nome.message);
+    if (errors.idade) toast.error(errors.idade.message);
   };
 
   return (
@@ -112,8 +108,6 @@ export default function PersonForm({
               placeholder="Digite sua idade"
               register={register}
               name="idade"
-              min={0}
-              max={120}
             />
 
             <SubmitButton

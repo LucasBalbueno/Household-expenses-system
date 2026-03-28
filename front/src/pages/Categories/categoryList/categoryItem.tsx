@@ -8,8 +8,8 @@ export default function CategoryItem({ category }: CategoryItemProps) {
           {category.description.charAt(0).toUpperCase()}
         </div>
         <div>
-          <p className="font-medium text-dark">{category.description}</p>
-          <p className="text-sm text-dark">
+          <p className="font-medium text-dark max-w-120 truncate">{category.description}</p>
+          <p className="text-sm text-dark/60">
             {category.purpose}
           </p>
         </div>

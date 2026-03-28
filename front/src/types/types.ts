@@ -28,7 +28,7 @@ export type DeleteButtonProps = {
 
 export type InputProps = {
   label: string;
-  type: 'text' | 'number';
+  type?: string;
   placeholder: string;
   register: UseFormRegister<any>;
   name: string;
@@ -44,3 +44,5 @@ export type SelectInputProps = {
   register?: UseFormRegister<any>;
   name?: string;
 }
+
+export type ListProps = object;

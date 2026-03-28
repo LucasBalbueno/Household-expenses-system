@@ -1,6 +1,5 @@
 import type { Category, CategoryData } from "../types/categoryTypes";
 import { api, validationError } from "./api";
-// import type { Person, PersonData } from "../types/peopleTypes";
 
 export const categoryService = {
   // Serviço para buscar todas as categorias
