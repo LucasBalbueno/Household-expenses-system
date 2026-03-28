@@ -79,20 +79,20 @@ export default function PersonForm({
   };
 
   return (
-    <div className="bg-background flex items-center justify-center">
+    <div className="bg-background flex items-center justify-center min-w-0">
       <div className="w-full">
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
 
-          <div className="mb-6">
-            <h1 className="text-2xl font-semibold text-dark">
+          <div className="mb-4 sm:mb-6">
+            <h1 className="text-lg sm:text-xl lg:text-2xl font-semibold text-dark">
               {isEditing ? 'Editar Pessoa' : 'Nova Pessoa'}
             </h1>
-            <p className="text-sm text-dark">
+            <p className="text-xs sm:text-sm text-dark">
               {isEditing ? 'Edite os dados da pessoa.' : 'Adicione um novo membro à sua família.'}
             </p>
           </div>
 
-          <form onSubmit={handleSubmit(handleFormSubmit, handleFormError)} className="space-y-6">
+          <form onSubmit={handleSubmit(handleFormSubmit, handleFormError)} className="space-y-4 sm:space-y-6">
             <InputForms
               label="Nome Completo"
               type="text"

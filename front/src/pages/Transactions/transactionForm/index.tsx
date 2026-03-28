@@ -80,7 +80,13 @@ export default function TransactionForm({
     try {
       await createTransaction(createTransactionData(data));
       toast.success('Transação criada com sucesso!');
-      reset();
+      reset({
+        description: '',
+        amount: 0,
+        typeTransaction: '',
+        categoryId: '',
+        personId: ''
+      });
     } catch (error: any) {
       if (error.response?.data?.message) {
         toast.error(error.response.data.message);
@@ -99,20 +105,20 @@ export default function TransactionForm({
   };
 
   return (
-    <div className="bg-background flex items-center justify-center">
+    <div className="bg-background flex items-center justify-center min-w-0">
       <div className="w-full">
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
 
-          <div className="mb-6">
-            <h1 className="text-2xl font-semibold text-dark">
+          <div className="mb-4 sm:mb-6">
+            <h1 className="text-lg sm:text-xl lg:text-2xl font-semibold text-dark">
               Nova Transação
             </h1>
-            <p className="text-sm text-dark">
+            <p className="text-xs sm:text-sm text-dark">
               Adicione uma nova transação.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit(handleFormSubmit, handleFormError)} className="space-y-6 overflow-y-auto max-h-[55vh]">
+          <form onSubmit={handleSubmit(handleFormSubmit, handleFormError)} className="space-y-4 sm:space-y-6 overflow-y-auto max-h-[55vh] sm:max-h-[60vh]">
             <InputForms
               label="Descrição"
               type="text"
